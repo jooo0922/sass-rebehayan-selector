@@ -1,0 +1,45 @@
+.a {
+  color: red;
+
+  // css에서처럼 .a ul {} 이렇게 하지 않고, html 처럼 하위 요소로 중첩시킴으로써 자손 선택자를 선언할 수 있음 -> nesting
+  ul {
+    border: 1px solid red;
+
+    // 자식 요소를 선택할 때도 이렇게 중첩 구조로 선언해 줌. -> html 구조와 상당히 유사함.
+    > li {
+      background-color: pink;
+
+      a {
+        text-decoration: none;
+
+        // 이렇게 & 를 넣어주면 a태그가 가상선택자 :hover 옆에 바로 붙게 됨.
+        &:hover {
+          color: red;
+        }
+
+        // 이렇게 해주면 & 가 a태그를 가리키게 되고, a태그들 중에서 클래스명이 'bbb' 인 요소를 가리키게 됨.
+        &.bbb {
+          font-size: 11px;
+        }
+      }
+
+      // 앞부분에서 &같은 기호를 포함한 어떠한 기호도 붙지 않는다면, '자손 선택자'가 되어버림. a {} 안에서 &.bbb {} 로 선택하는 것과 동일함.
+      .bbb {
+        text-indent: 10px;
+      }
+
+      // li의 마지막 요소를 선택하고 싶다면 이런 식으로 > li의 하위계층 안에서 &(li들을 가리킴)를 찍고, 가상선택자 :last-child를 찍어주면 됨.
+      &:last-child {
+        border: 1px dotted yellow;
+      }
+    }
+  }
+}
+
+/*
+css에서 사용하던 selector와 유사한 선택자들이 많이 사용되고 있음.
+
+다만 sass는 nesting(중첩) 구조 내에서 코드가 작성되기 때문에,
+이러한 특수한 구조에서 사용되는 문법이나 기호(& 같은거)만 잘 지키면서
+코드를 작성하면 css에서 원래 사용하던 selector들을 익숙하게 사용할 수 있을 것 같음. 
+*/
